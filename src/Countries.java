@@ -29,13 +29,17 @@ public class Countries {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please type a letter to look up a Country name.");
-        String letter = scanner.nextLine();
+        String letter = scanner.nextLine().toLowerCase();
         ArrayList<Country> letterList = countries.get(letter);
-        String contents = "";
-        for (Country names : letterList) {
-            contents += names.name + "\n";
-        }
+        String newFileName = String.format("%s_countries.txt", letter);
 
+        if(countries.containsKey(letter)) {
+            String contents = "";
+            for (Country names : letterList) {
+                contents = contents + String.format("%s %s\n", names.abbrev, names.name);
+                writeFile(newFileName, contents);
+            }
+        }
     }
 
     static String readFile(String fileName) {
