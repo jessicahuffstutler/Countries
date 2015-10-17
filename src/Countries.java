@@ -29,7 +29,7 @@ public class Countries {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please type a letter to look up a Country name.");
-        String letter = scanner.nextLine().toLowerCase();
+        String letter = scanner.nextLine().toUpperCase();
         ArrayList<Country> letterList = countries.get(letter);
         String newFileName = String.format("%s_countries.txt", letter);
 
