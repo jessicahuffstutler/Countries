@@ -38,7 +38,7 @@ public class Countries {
         ArrayList<Country> letterList = countries.get(letter);
         String newFileName = String.format("%s_countries.txt", letter);
 
-        if(countries.containsKey(letter)) {
+        if (countries.containsKey(letter)) {
             String contents = "";
             for (Country names : letterList) {
                 contents = contents + String.format("%s %s\n", names.abbrev, names.name);
@@ -86,6 +86,5 @@ public class Countries {
             System.out.println("Save not successful.");
         }
     }
-
-    //Save an "X_countries.txt" file, where X is the letter they typed, which only lists the countries starting with that letter
 }
+
