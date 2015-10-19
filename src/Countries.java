@@ -12,17 +12,18 @@ public class Countries {
     static Country country;
 
     public static void main(String[] args) {
-        HashMap<String, ArrayList<Country>> countries = new HashMap(); //where the key is the first letter of the country name.
         String fileContent = readFile("countries.txt"); //file is String
-        String[] countriesContent = fileContent.split("\n"); //turn file into String[]?
+        String[] countriesContent = fileContent.split("\n"); //primitive array
+        HashMap<String, ArrayList<Country>> countries = new HashMap(); //where the key is the first letter of the country name.
 
-        for (String countryName : countriesContent) {
-            String firstLetter = String.valueOf(countryName.charAt(0));
-            ArrayList<Country> list = countries.get(firstLetter);
-            String[] column = countryName.split("\\|");
+        for (String countryName : countriesContent) { //for loop: collection countriesContent and a temporary variable, countryName, that represents the particular item in the array that we are at in that particulat moment
+        //old style for loop: for (int i = 0; i < lines.length; i++) {
+            String[] column = countryName.split("\\|"); //splitting that particular line that we are at into two columns
             String abbrev = column[0];
             String name = column[1];
-            Country country = new Country(name, abbrev);
+            Country country = new Country(abbrev, name); //OBJECT
+            String firstLetter = String.valueOf(countryName.charAt(0)); //If i used "name" instead of "CountryName", I would need to use "toLowerCase" below to create the new txt file.
+            ArrayList<Country> list = countries.get(firstLetter);
             if (list == null) {
                 list = new ArrayList();
                 list.add(country);
@@ -45,6 +46,16 @@ public class Countries {
                 writeFile(newFileName, contents);
             }
         }
+
+        //if (letterList == null) {
+       // System.out.println(String.format("Can't find any country starting with %s.", letter));
+    //} else {
+      //  String output = "";
+      //  for (Country names : letterlist) {
+      //      output += String.format("%s %s\n", country.abbrev, country.name);
+       // }
+       // writeFile(String.format("%s_countries.txt", letter), output);
+    //}
 
         saveCountry();
     }
