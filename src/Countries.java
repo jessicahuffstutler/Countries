@@ -1,3 +1,5 @@
+import jodd.json.JsonSerializer;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,6 +8,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Countries {
+
+    static Country country;
+
     public static void main(String[] args) {
         HashMap<String, ArrayList<Country>> countries = new HashMap(); //where the key is the first letter of the country name.
         String fileContent = readFile("countries.txt"); //file is String
@@ -40,6 +45,8 @@ public class Countries {
                 writeFile(newFileName, contents);
             }
         }
+
+        saveCountry();
     }
 
     static String readFile(String fileName) {
@@ -63,6 +70,20 @@ public class Countries {
             fw.close();
         } catch (Exception e) {
 
+        }
+    }
+
+    static void saveCountry() {
+        File f = new File("save.json"); //json library wants you to set getters for anything you want to save
+        JsonSerializer serializer = new JsonSerializer();
+        String contentToSave = serializer.serialize(country);
+
+        try {
+            FileWriter fw = new FileWriter(f);
+            fw.write(contentToSave);
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("Save not successful.");
         }
     }
 
